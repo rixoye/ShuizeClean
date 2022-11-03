@@ -94,6 +94,7 @@ def dealXlsx(file_path):
     Host碰撞(目前没遇到有用的情况,暂不处理，舍弃)
     IP反查域名(舍弃,容易在cdn的ip查到一堆域名)
 
+    爬虫(复杂url)
     动态链接和后台地址(会出现业务url,价值相对高)
     网络空间搜索引擎(url简单路径,http头+ip/域名+端口)
     存活网站标题(url简单路径,http头+ip/域名+端口)
@@ -144,11 +145,18 @@ def dealXlsx(file_path):
             # print(row[0].value)
             tmp2_set.add(row[0].value)
 
+    ws6 = wb['爬虫']
+    for row in ws6.iter_rows(min_row=2, max_col=3, max_row=ws6.max_row):
+        # row[1]:url 会有一个中文标题
+        if "http" in row[2].value:
+            # print(row[2].value)
+            tmp2_set.add(row[2].value)
+
     for u in tmp2_set:
         if u != None and u != "[]":
             u = u.strip().lstrip("https://").lstrip("http://")
             d = u.split(":")[0].split("/")[0]
-            print(d,u)
+            # print(d,u)
             tmp1_set.add(d)
             url_set.add(u+"\n")
 
