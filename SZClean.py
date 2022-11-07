@@ -184,7 +184,7 @@ def main(path):
         if os.path.isfile(fp) and fp.endswith(".xlsx") and not f.startswith("."):
             print(f)
             dealXlsx(fp)
-            break
+            #break
     
     save()
 
