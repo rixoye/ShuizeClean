@@ -113,6 +113,7 @@ def dealXlsx(file_path):
     for row in ws1.iter_rows(min_row=2, max_col=3, max_row=ws1.max_row):
         # row[0]:domain row[1]:ip_list row[2]:cdn
         tmp1_set.add(row[0].value)
+        # print(row[0].value)
         if "NOT" in row[2].value:
             # 不是CDN,添加ip
             tmp1_set.add(row[1].value)
@@ -154,14 +155,16 @@ def dealXlsx(file_path):
 
     for u in tmp2_set:
         if u != None and u != "[]":
-            u = u.strip().lstrip("https://").lstrip("http://")
+            # print(u)
+            u = u.strip().replace("https://","").replace("http://","")
             d = u.split(":")[0].split("/")[0]
-            # print(d,u)
+            # print(u,d)
             tmp1_set.add(d)
             url_set.add(u+"\n")
 
     for i in tmp1_set:
         if i != None and i != "[]":
+            # print(i)
             dealItem(i)
 
 def save():
